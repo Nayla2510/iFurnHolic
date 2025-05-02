@@ -69,20 +69,20 @@
               <hr class="dropdown-divider">
             </li>
 
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+        </li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
+        <li>
+          <a class="dropdown-item d-flex align-items-center" href="#">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Sign Out</span>
+          </a>
+        </li>
 
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
+      </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
 
       </ul>
     </nav><!-- End Icons Navigation -->
@@ -103,7 +103,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="kategori.php">
-        <i class="bi bi-123"></i>
+          <i class="bi bi-123"></i>
           <span>Kategori Produk</span>
         </a>
       </li><!-- End Kategori Page Nav -->
@@ -169,61 +169,54 @@
             <div class="col-12">
               <div class="card info-card customers-card shadow-sm w-100">
                 <div class="card-body text-center py-4">
-                  <h4 class="mb-2">Selamat datang di Website Admin
-                <strong>iFurnHolic</strong></h4>
-                <p class="text-muted small mb-0">Kelola produk, transaksi, dan 
-                  pelanggan dengan mudah.</p>
-                    </div>
+                  <h4 class="mb-2">Selamat datang di Website Admin <strong>iFurnHolic!</strong></h4>
+                  <p class="text-muted small mb-0">Kelola produk, transaksi, dan pelanggan dengan mudah.</p>
                 </div>
               </div>
+            </div>
+            <!-- End Welcome Card -->
 
-            </div><!-- End Welcome Card -->
-
-            <!-- Sales Card -->
+            <!-- Orders Card -->
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
 
                 <div class="card-body">
-                </h5 class="card-title">Pesanan <span>Semua waktu</span><h5>
-
+                  <h5 class="card-title">Pesanan <span>| Semua Waktu</span></h5>
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i> <!-- Ikon keranjang belanja-->
+                      <i class="bi bi-basket"></i> <!-- Ikon keranjang belanja -->
                     </div>
                     <div class="ps-3">
                       <h6>145</h6>
-
                     </div>
                   </div>
                 </div>
-
               </div>
-            </div><!-- End Sales Card -->
+            </div>
+            <!-- End Orders Card -->
 
             <!-- Revenue Card -->
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Pendapatan<span>| Hari ini</span></h5>
-
+                  <h5 class="card-title">Pendapatan <span>| Hari ini</span></h5>
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-currency-dollar"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>Rp. 32.555</h6>
-
+                      <h6>Rp. 35.000</h6>
                     </div>
                   </div>
                 </div>
 
               </div>
-            </div><!-- End Revenue Card -->
+            </div>
 
+            <!-- End Revenue Card -->
           </div>
         </div><!-- End Left side columns -->
-
       </div>
     </section>
 
@@ -240,7 +233,7 @@
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
       Designed by <a href="https://www.instagram.com/nylftrn__?igsh=MWo5aWc0anQzdTRycQ=="
-      target="_blank">Nayla</a>
+        target="_blank">Nayla</a>
     </div>
   </footer><!-- End Footer -->
 
