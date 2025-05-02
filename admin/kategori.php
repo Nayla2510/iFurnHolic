@@ -225,7 +225,48 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
+                                  <?php
+                                  include "koneksi.php";
+                                  $no = 1;
+
+                                  // Cek apakah ada pencarian
+                                  $query = isset($_POST['query']) ? mysqli_real_escape_string($koneksi, $_POST['query']):'';
+
+                                  //Query dasar
+                                  $sql_query = "SELECT id_kategori, nm_kategori FROM tb_kategori";
+
+                                  //Jika ada pencarian, tambahkan kondisi WHERE
+                                  if (!empty($query)) {
+                                    $sql_query ="WHERE nm_kategori LIKE '%$query%";
+                                  }
+
+                                  $sql = mysqli_query($koneksi, $sql_query);
+
+                                  if (mysqli_num_rows($sql) > 0) {
+                                    while ($hasil = mysqli_fetch_array($sql)){
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $no++?></td>
+                                        <td><?php echo $hasil['nm_kategori'];?></td>
+                                        <td>
+                                            <a href="e_kategori.php<?php echo $hasil['id_kategori']; ?>" class="btn btn-warning">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <a href="h_kategori.php<?php echo $hasil['id_kategori']; ?>" class="btn btn-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                  }
+                                }else{
+                                    ?>
+                                    <tr>
+                                        <td colspan="3" class="text-center">Data tidak ditemukan</td>
+                                    </tr>
+                                <?php
+                                }
+                                  ?>
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
