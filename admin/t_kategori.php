@@ -1,3 +1,28 @@
+<?php
+include "koneksi.php";
+
+if (isset($_POST['simpan'])) {
+    $auto = mysqli_query($koneksi, "select max(id_kategori) as max_code from tb_kategori");
+    $hasil = mysqli_fetch_array($auto);
+    $code =  $hasil['max_code'];
+    $urutan = (int)substr($code, 1, 3);
+    $urutan++;
+    $huruf = "K";
+    $id_kategori = $huruf . sprintf("%03s", $urutan);
+    $nm_kategori = $_POST['nm_kategori'];
+
+    $query = mysqli_query($koneksi, "INSERT INTO tb_kategori(id_kategori, nm_kategori) VALUES ('$id_kategori', '$nm_kategori')");
+    if ($query) {
+        echo "<script>alert('Data berhasil di tambahkan')</script>";
+        header("refresh:0, kategori.php");
+    } else {
+        echo "<script>alert('Data gagal di tambahkan')</script>";
+        header("refresh:0, kategori.php");
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +30,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Kategori Produk - iFurnHolic Admin</title>
+    <title>Kategori Produk - iFurnHolic</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -51,22 +76,9 @@
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
-
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -76,37 +88,10 @@
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6>Nayla</h6>
-                            <span>Admin</span>
+                            <span>SecretAdmin</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-gear"></i>
-                                <span>Account Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
-                            </a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -189,90 +174,34 @@
             <h1>Kategori Produk</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Beranda</a></li>
-                    <li class="breadcrumb-item active">Kategori Produk </li>
+                    <li class="breadcrumb-item"><a href="index.php">Beranda</a></li>
+                    <li class="breadcrumb-item">Kategori Produk</li>
+                    <li class="breadcrumb-item active">Tambah</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="t_kategori.php" class="btn btn-primary mt-3">
-                            <i class="bi bi-plus-lg"></i>Tambah data
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <section class="section">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
+
                     <div class="card">
                         <div class="card-body">
 
-                            <!-- Table with stripped rows -->
-                            <table class="table table-striped mt-2">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Nama Kategori</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                  <?php
-                                  include "koneksi.php";
-                                  $no = 1;
-
-                                  // Cek apakah ada pencarian
-                                  $query = isset($_POST['query']) ? mysqli_real_escape_string($koneksi, $_POST['query']):'';
-
-                                  //Query dasar
-                                  $sql_query = "SELECT id_kategori, nm_kategori FROM tb_kategori";
-
-                                  //Jika ada pencarian, tambahkan kondisi WHERE
-                                  if (!empty($query)) {
-                                    $sql_query ="WHERE nm_kategori LIKE '%$query%";
-                                  }
-
-                                  $sql = mysqli_query($koneksi, $sql_query);
-
-                                  if (mysqli_num_rows($sql) > 0) {
-                                    while ($hasil = mysqli_fetch_array($sql)){
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $no++?></td>
-                                        <td><?php echo $hasil['nm_kategori'];?></td>
-                                        <td>
-                                            <a href="e_kategori.php<?php echo $hasil['id_kategori']; ?>" class="btn btn-warning">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </a>
-                                            <a href="h_kategori.php<?php echo $hasil['id_kategori']; ?>" class="btn btn-danger">
-                                                <i class="bi bi-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php
-                                  }
-                                }else{
-                                    ?>
-                                    <tr>
-                                        <td colspan="3" class="text-center">Data tidak ditemukan</td>
-                                    </tr>
-                                <?php
-                                }
-                                  ?>
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
+                            <!-- Vertical Form -->
+                            <form class="row g-3 mt-2" method="post">
+                                <div class="col-12">
+                                    <label for="nm_kategori" class="form-label">Nama Kategori</label>
+                                    <input type="text" class="form-control" id="nm_kategori" name="nm_kategori" placeholder="Masukkan Nama Kategori">
+                                </div>
+                                <div class="text-center">
+                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                    <button type="submit" class="btn btn-primary" name="simpan">Simpan</button>
+                                </div>
+                            </form><!-- Vertical Form -->
 
                         </div>
-
                     </div>
+
                 </div>
             </div>
         </section>
@@ -282,15 +211,14 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>iFurnHolic</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
             <!-- You can delete the links only if you purchased the pro version. -->
             <!-- Licensing information: https://bootstrapmade.com/license/ -->
             <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-            Designed by <a href="https://www.instagram.com/nylftrn__?igsh=MWo5aWc0anQzdTRycQ=="
-                target="_blank">Nayla</a>
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
     </footer><!-- End Footer -->
 
