@@ -53,11 +53,10 @@
 
         <div class="search-bar">
             <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword" value="<?php echo isset($_POST['query']) ? htmlspecialchars($_POST['query']) : ''; ?>">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button> 
             </form>
         </div><!-- End Search Bar -->
-
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
@@ -187,14 +186,14 @@
                                   $no = 1;
 
                                   // Cek apakah ada pencarian
-                                  $query = isset($_POST['query']) ? mysqli_real_escape_string($koneksi, $_POST['query']):'';
+                                  $query = isset($_POST['query']) ? mysqli_real_escape_string($koneksi, $_POST['query']) : '';
 
                                   //Query dasar
                                   $sql_query = "SELECT id_kategori, nm_kategori FROM tb_kategori";
 
                                   //Jika ada pencarian, tambahkan kondisi WHERE
                                   if (!empty($query)) {
-                                    $sql_query ="WHERE nm_kategori LIKE '%$query%";
+                                    $sql_query .= " WHERE nm_kategori LIKE '%$query%'";
                                   }
 
                                   $sql = mysqli_query($koneksi, $sql_query);
@@ -209,7 +208,7 @@
                                             <a href="e_kategori.php?id=<?php echo $hasil['id_kategori']; ?>" class="btn btn-warning">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
-                                            <a href="h_kategori.php?id=<?php echo $hasil['id_kategori']; ?>" class="btn btn-danger">
+                                            <a href="h_kategori.php?id=<?php echo $hasil['id_kategori']; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')">
                                                 <i class="bi bi-trash"></i>
                                             </a>
                                         </td>

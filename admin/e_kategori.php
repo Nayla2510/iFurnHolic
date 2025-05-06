@@ -2,19 +2,19 @@
 include "koneksi.php";
 
 $id = $_GET['id'];
-$sql = mysqli_query(mysql: $koneksi, query: "SELECT * FROM tb_kategori WHERE id_kategori ='$id'");
+$sql = mysqli_query($koneksi, "SELECT * FROM tb_kategori WHERE id_kategori ='$id'");
 $data = mysqli_fetch_array($sql);
 
 if (isset($_POST['simpan'])) {
     $nm_kategori = $_POST['nm_kategori'];
 
-    $query = mysqli_query(mysql: $koneksi, query: "UPDATE tb_kategori SET nm_kategori = '$nm_kategori' WHERE id_kategori = '$id'");
+    $query = mysqli_query($koneksi, "UPDATE tb_kategori SET nm_kategori = '$nm_kategori' WHERE id_kategori = '$id'");
     if ($query) {
         echo "<script>alert('Data Berhasil Diubah')</script>";
-        header(header: "refresh:0, kategori.php");
+        header("refresh:0, kategori.php");
     } else {
         echo "<script>alert('Data Gagal Diubah')</script>";
-        header(header: "refresh:0, kategori.php");
+        header("refresh:0, kategori.php");
     }
 }
 ?>
