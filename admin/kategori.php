@@ -54,7 +54,7 @@
         <div class="search-bar">
             <form class="search-form d-flex align-items-center" method="POST" action="#">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword" value="<?php echo isset($_POST['query']) ? htmlspecialchars($_POST['query']) : ''; ?>">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button> 
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
         </div><!-- End Search Bar -->
         <nav class="header-nav ms-auto">
@@ -80,6 +80,18 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="logout.php">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
 
     </header><!-- End Header -->
 
@@ -173,56 +185,56 @@
                             <!-- Table with stripped rows -->
                             <table class="table table-striped mt-2">
                                 <thead>
-                                 
-                                <tr>
+
+                                    <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Nama Kategori</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <?php
-                                  include "koneksi.php";
-                                  $no = 1;
+                                    <?php
+                                    include "koneksi.php";
+                                    $no = 1;
 
-                                  // Cek apakah ada pencarian
-                                  $query = isset($_POST['query']) ? mysqli_real_escape_string($koneksi, $_POST['query']) : '';
+                                    // Cek apakah ada pencarian
+                                    $query = isset($_POST['query']) ? mysqli_real_escape_string($koneksi, $_POST['query']) : '';
 
-                                  //Query dasar
-                                  $sql_query = "SELECT id_kategori, nm_kategori FROM tb_kategori";
+                                    //Query dasar
+                                    $sql_query = "SELECT id_kategori, nm_kategori FROM tb_kategori";
 
-                                  //Jika ada pencarian, tambahkan kondisi WHERE
-                                  if (!empty($query)) {
-                                    $sql_query .= " WHERE nm_kategori LIKE '%$query%'";
-                                  }
+                                    //Jika ada pencarian, tambahkan kondisi WHERE
+                                    if (!empty($query)) {
+                                        $sql_query .= " WHERE nm_kategori LIKE '%$query%'";
+                                    }
 
-                                  $sql = mysqli_query($koneksi, $sql_query);
+                                    $sql = mysqli_query($koneksi, $sql_query);
 
-                                  if (mysqli_num_rows($sql) > 0) {
-                                    while ($hasil = mysqli_fetch_array($sql)){
+                                    if (mysqli_num_rows($sql) > 0) {
+                                        while ($hasil = mysqli_fetch_array($sql)) {
                                     ?>
-                                    <tr>
-                                        <td><?php echo $no++?></td>
-                                        <td><?php echo $hasil['nm_kategori'];?></td>
-                                        <td>
-                                            <a href="e_kategori.php?id=<?php echo $hasil['id_kategori']; ?>" class="btn btn-warning">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </a>
-                                            <a href="h_kategori.php?id=<?php echo $hasil['id_kategori']; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')">
-                                                <i class="bi bi-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php
-                                  }
-                                }else{
+                                            <tr>
+                                                <td><?php echo $no++ ?></td>
+                                                <td><?php echo $hasil['nm_kategori']; ?></td>
+                                                <td>
+                                                    <a href="e_kategori.php?id=<?php echo $hasil['id_kategori']; ?>" class="btn btn-warning">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
+                                                    <a href="h_kategori.php?id=<?php echo $hasil['id_kategori']; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td colspan="3" class="text-center">Data tidak ditemukan</td>
+                                        </tr>
+                                    <?php
+                                    }
                                     ?>
-                                    <tr>
-                                        <td colspan="3" class="text-center">Data tidak ditemukan</td>
-                                    </tr>
-                                <?php
-                                }
-                                  ?>
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->

@@ -56,7 +56,7 @@ if (isset($_POST['update'])) {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Produk - iFurnHolic</title>
+    <title>Produk - iFurnHolic Admin</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -117,7 +117,7 @@ if (isset($_POST['update'])) {
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="logout.php">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
