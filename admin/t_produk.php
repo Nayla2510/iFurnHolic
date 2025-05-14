@@ -1,5 +1,19 @@
 <?php
+session_start();
 include "koneksi.php";
+
+// Cek apakah sudah login
+if (!isset($_SESSION["login"])) {
+    header("location: login.php");
+    exit;
+}
+
+// Cek apakah status tersedia dan pastikan user adalah admin
+if (!isset($_SESSION["status"]) || $_SESSION["status"] !== "admin") {
+    echo "<script>alert('Akses ditolak!Halaman ini hanya untuk Admin.'); window.location.href='login.php'</script>";
+    exit;
+}
+
 
 // Mendapatkan kode produk otomatis
 $auto = mysqli_query($koneksi, " SELECT MAX(id_produk) AS max_code FROM tb_produk");
@@ -228,9 +242,8 @@ if (isset($_POST['simpan'])) {
                                         <?php
                                         include "koneksi.php";
                                         $query = mysqli_query($koneksi, "SELECT * FROM tb_kategori");
-                                        while ($kategori = mysqli_fetch_array($query)){
+                                        while ($kategori = mysqli_fetch_array($query)) {
                                             echo "<option value='{$kategori['id_kategori']}'>{$kategori['nm_kategori']}</option>";
-
                                         }
                                         ?>
                                     </select>

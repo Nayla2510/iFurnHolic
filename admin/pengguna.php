@@ -1,3 +1,20 @@
+<?php
+session_start();
+include "koneksi.php";
+
+// Cek apakah sudah login
+if (!isset($_SESSION["login"])) {
+    header("location: login.php");
+    exit;
+}
+
+// Cek apakah status tersedia dan pastikan user adalah admin
+if (!isset($_SESSION["status"]) || $_SESSION["status"] !== "admin") {
+    echo "<script>alert('Akses ditolak!Halaman ini hanya untuk Admin.'); window.location.href='login.php'</script>";
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,9 +62,9 @@
 
         <div class="search-bar">
             <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword" value="<?php echo isset($_POST['query'])? htmlspecialchars($_POST['query']) : ''; ?>">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword" value="<?php echo isset($_POST['query']) ? htmlspecialchars($_POST['query']) : ''; ?>">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form> 
+            </form>
         </div><!-- End Search Bar -->
 
         <nav class="header-nav ms-auto">
@@ -245,7 +262,7 @@
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
-     <footer id="footer" class="footer">
+    <footer id="footer" class="footer">
         <div class="copyright">
             &copy; Copyright <strong><span>iFurnHolic</span></strong>. All Rights Reserved
         </div>
