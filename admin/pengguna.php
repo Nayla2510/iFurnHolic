@@ -1,8 +1,3 @@
-<?php
-session_start();
-include "koneksi.php";
-
-// Cek 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +5,7 @@ include "koneksi.php";
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Produk - iFurnHolic</title>
+    <title>Pengguna - iFurnHolic</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -123,7 +118,7 @@ include "koneksi.php";
             </li><!-- End Produk Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" href="keranjang.php">
+                <a class="nav-link collapsed" href="keranjang.php">
                     <i class="bi bi-envelope"></i>
                     <span>Keranjang</span>
                 </a>
@@ -144,7 +139,7 @@ include "koneksi.php";
             </li><!-- End Laporan Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="pengguna.php">
+                <a class="nav-link" href="pengguna.php">
                     <i class="bi bi-dash-circle"></i>
                     <span>Pengguna</span>
                 </a>
@@ -169,7 +164,7 @@ include "koneksi.php";
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <a href="t_produk.php" class="btn btn-primary mt-3">
+                        <a href="t_pengguna.php" class="btn btn-primary mt-3">
                             <i class="bi bi-plus-lg"></i> Tambah Data
                         </a>
                     </div>
@@ -180,7 +175,7 @@ include "koneksi.php";
         <section class="section">
             <div class="row">
 
-                <div class="col-lg-6">
+                <div class="col-lg-12">
 
                     <div class="card">
                         <div class="card-body">
@@ -196,6 +191,46 @@ include "koneksi.php";
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                    include "koneksi.php";
+                                    $no = 1;
+
+                                    // Cek apakah ada input pencarian
+                                    $query = isset($_POST['query']) ? mysqli_real_escape_string($koneksi, $_POST['query']) : '';
+
+                                    // Query dasar
+                                    $sql_query = "SELECT id_user, username, status FROM tb_user";
+
+                                    // Tambahkan pencarian jika input tidak kosong
+                                    if (!empty($query)) {
+                                        $sql_query .= " WHERE username LIKE '%$query%'";
+                                    }
+
+                                    $sql = mysqli_query($koneksi, $sql_query);
+
+                                    if (mysqli_num_rows($sql) > 0) {
+                                        while ($hasil = mysqli_fetch_array($sql)) {
+                                    ?>
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $hasil['username']; ?></td>
+                                                <td><?php echo $hasil['status']; ?></td>
+                                                <td>
+                                                    <a href="h_pengguna.php?id=<?php echo $hasil['id_user']; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td colspan="4" class="text-center">Data tidak ditemukan</td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
 
                                 </tbody>
                             </table>
