@@ -250,7 +250,7 @@
             &copy; Copyright <strong><span>iFurnHolic</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-            Designed by <a href="https://www.instagram.com/nylftrn__?igsh=MWo5aWc0anQzdTRycQ==">Nayla</a>
+            Designed by <a href="https://www.instagram.com/nylftrn__?igsh=MWo5aWc0anQzdTRycQ==" target="_blank">Nayla</a>
         </div>
     </footer><!-- End Footer -->
 
