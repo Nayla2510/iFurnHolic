@@ -27,6 +27,49 @@
     <link rel="stylesheet" href="css/price_rangs.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .single_product_item {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .product_img_wrapper {
+            width: 100%;
+            height: 200px;
+            /* Sesuaikan tinggi gambar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .product_img_wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Crop gambar agar tetap proporsional */
+            border-radius: 10px;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -8px;
+            background: #f72a74;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: bold;
+            line-height: 1;
+            min-width: 16px;
+            text-align: center;
+            z-index: 10;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,7 +79,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.php"> 
+                        <a class="navbar-brand" href="index.php">
                             <h1>iFurnHolic</h1>
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -58,20 +101,46 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="hearer_icon d-flex">
-                            <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-cart-plus"></i>
-                                </a>
-                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="single_product">
-    
-                                    </div>
-                                </div> -->
+                        <?php session_start(); ?>
+                        <?php if (isset($_SESSION['username'])) : ?>
+                            <div class="header_icon d-flex">
+                                <!-- Cart Link -->
+                                <?php
+                                include 'admin/koneksi.php';
 
-                            </div>
-                        </div>
+                                $user_id = $_SESSION['id_user'] ?? null;
+
+                                if ($user_id) {
+                                    $query = "SELECT COUNT (*) as total FROM tb_pesanana WHERE id_user = '$user_id'";
+                                    $result = mysqli_query($koneksi, $query);
+                                    $data = mysqli_fetch_assoc($result);
+                                    $jumlah_item = $data['total'] ?? 0;
+                                } else {
+                                    $jumlah_item = 0;
+                                }
+                                ?>
+
+                                <a href="cart.php" id="cartlink" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-cart-plus" style="font-size: 16px;"></i>
+                                    <span class="cart-badge"><?= $jumlah_item ?></span>
+                                </a>
+
+                                <!-- User Dropdown -->
+                                <div class="dropdown user">
+                                    <a class="dropdown-toggle d-flex align-items-center" herf="#" id="userDropdown" role="button" data-toggle="dropdown" aria-hospopup="true" arta-expanded="false">
+                                        <i class="fas fa-user"></i>
+                                        <span class="ml-2 text-dark"><?= htmlspecialchars($_SESSION['username']); ?></span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" arta-labelledby="userDropdown">
+                                        <a class="dropdown-item" href="logout.php">Logout</a>
+                                    </div>
+                                    <div>
+                                    </div>
+
+                                <?php else: ?>
+                                    <!-- Login Button -->
+                                    <a href="login.php" class="btn btn-primary ml-3 px-3 py-2" style="border-radius: 20px;">Login</a>
+                                <?php endif; ?>
                     </nav>
                 </div>
             </div>
@@ -107,36 +176,31 @@
                             <div class="l_w_title">
                                 <h3>Kategori Produk</h3>
                             </div>
+                            <?php
+                            include 'admin/koneksi.php'; // Pastikan file koneksi ada
+
+                            // Ambil kategori yang di pilih dari URL
+                            $id_kategori = isset($_GET['id_kategori']) ? mysqli_real_escape_string($koneksi, $_GET['id_kategori']) : null;
+
+                            // Ambil semua kategori beserta jumlah produknya
+                            $query_kategori = " SELECT k.id_kategori, k.nm_kategori, COUNT(p.id_produk) AS jumlah_produk FROM tb_kategori k LEFT JOIN tb_produk p ON k.id_kategori = p.id_kategori GROUP BY k.id_kategori";
+                            $result_kategori = mysqli_query($koneksi, $query_kategori);
+                            ?>
+
+                            <!-- Sidebar Kategori -->
                             <div class="widgets_inner">
                                 <ul class="list">
                                     <li>
-                                        <a href="#">Frozen Fish</a>
-                                        <span>(250)</span>
+                                        <a href="?" <?php echo is_null($id_kategori) ? 'style="font-weight:bold;"' : ''; ?>>Semua Kategori</a>
                                     </li>
-                                    <li>
-                                        <a href="#">Dried Fish</a>
-                                        <span>(250)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fresh Fish</a>
-                                        <span>(250)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Meat Alternatives</a>
-                                        <span>(250)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fresh Fish</a>
-                                        <span>(250)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Meat Alternatives</a>
-                                        <span>(250)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Meat</a>
-                                        <span>(250)</span
-                                    </li>
+                                    <?php while ($row_kategori = mysqli_fetch_assoc($result_kategori)) { ?>
+                                        <li>
+                                            <a href="?id_kategori=<?php echo $row_kategori['id_kategori']; ?>" <?php echo ($id_kategori == $row_kategori['id_kategori']) ? 'style="font-weight:bold;"' : ''; ?>>
+                                                <?php echo htmlspecialchars($row_kategori['nm_kategori']); ?>
+                                            </a>
+                                            <span>(<?php echo $row_kategori['jumlah_produk']; ?>)</span>
+                                        </li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </aside>
@@ -147,57 +211,107 @@
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center">
                                 <div class="single_product_menu d-flex">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Cari Produk"
-                                            aria-describedby="inputGroupPrepend">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroupPrepend"><i
-                                                    class="ti-search"></i></span>
+                                    <form method="GET" action="">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="search" placeholder="Cari produk..." value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+                                            <div class="input-group-prepend">
+                                                <button type="submit" class="input-group-text"><i class="ti-search"></i></button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
 
+                    <?php
+                    // Tentukan jumlah produk per halaman
+                    $limit = 6;
+                    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                    $start = ($page - 1) * $limit;
+
+                    // Ambil kata kunci pencarian jika ada
+                    $search = isset($_GET['search']) ? mysqli_real_escape_string($koneksi, $_GET['search']) : "";
+
+                    // Query produk berdasarkan kategori & pencarian
+                    $where_clause = "1=1"; // Default menampilkan semua produk
+                    if (!empty($search)) {
+                        $where_clause .= " AND nm_produk LIKE '%$search%'";
+                    }
+                    if (!empty($id_kategori)) {
+                        $where_clause .= " AND id_kategori = '$id_kategori'"; // Perhatikan tanda kutip untuk string
+                    }
+
+                    // Query produk dengan filter kategori dan pencarian
+                    $query_produk = "SELECT * FROM tb_produk WHERE $where_clause LIMIT $start, $limit";
+                    $query_total = "SELECT COUNT(*) AS total FROM tb_produk WHERE $where_clause";
+
+                    $result_produk = mysqli_query($koneksi, $query_produk);
+                    $total_result = mysqli_query($koneksi, $query_total);
+                    $total_row = mysqli_fetch_assoc($total_result);
+                    $total_products = $total_row['total'];
+                    $total_pages = ceil($total_products / $limit);
+                    ?>
+
+                    <!-- Produk List -->
                     <div class="row align-items-center latest_product_inner">
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_1.png" alt="">
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                        <?php while ($row_produk = mysqli_fetch_assoc($result_produk)) { ?>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="single_product_item">
+                                    <div class="product_img_wrapper">
+                                        <img src="admin/produk_img/<?php echo htmlspecialchars($row_produk['gambar']); ?>" alt="">
+                                    </div>
+                                    <div class="single_product_text">
+                                        <h4><?php echo htmlspecialchars($row_produk['nm_produk']); ?></h4>
+                                        <h3>Rp <?php echo number_format($row_produk['harga'], 0, ',', '.'); ?></h3>
+                                        <a href="detail_produk.php?id=<?php echo $row_produk['id_produk']; ?>" class="add_cart">+ keranjang</a>
+                                    </div>
                                 </div>
-                            </div>  
+                            </div>
+                        <?php } ?>
+                    </div>
+
+                    <?php if (mysqli_num_rows($result_produk) == 0) { ?>
+                        <div class="col-lg-12 text-center">
+                            <p>Produk tidak ditemukan.</p>
+                        </div>
+                    <?php } ?>
+                    
+                    <!-- Pagination -->
+                    <?php if ($total_pages > 1) { ?>
                         <div class="col-lg-12">
                             <div class="pageination">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
-                                                <i class="ti-angle-double-left"></i>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
-                                                <i class="ti-angle-double-right"></i>
-                                            </a>
-                                        </li>
+                                        <?php if ($page > 1) { ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?id_kategori=<?php echo $id_kategori; ?>&search=<?php echo $search; ?>&page=<?php echo ($page - 1); ?>" aria-label="Previous">
+                                                    <i class="ti-angle-double-left"></i>
+                                                </a>
+                                            </li>
+                                        <?php } ?>
+
+                                        <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+                                            <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                                                <a class="page-link" href="?id_kategori=<?php echo $id_kategori; ?>&search=<?php echo $search; ?>&page=<?php echo $i; ?>"></a>
+                                            </li>
+                                        <?php } ?>
+
+                                        <?php if ($page < 1) { ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?id_kategori=<?php echo $id_kategori; ?>&search=<?php echo $search; ?>&page=<?php echo ($page + 1); ?>" aria-label="Next">
+                                                    <i class="ti-angle-double-right"></i>
+                                                </a>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <!--================End Category Product Area =================-->
@@ -224,8 +338,10 @@
                     <div class="col-lg-8">
                         <div class="copyright_text">
                             <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | iFurnHolic <i class="ti-heart" aria-hidden="true"></i> by <a href="https://www.instagram.com/nylftrn__?igsh=MWo5aWc0anQzdTRycQ==" target="_blank">Nayla</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
+                                Copyright &copy;<script>
+                                    document.write(new Date().getFullYear());
+                                </script> All rights reserved | iFurnHolic <i class="ti-heart" aria-hidden="true"></i> by <a href="https://www.instagram.com/nylftrn__?igsh=MWo5aWc0anQzdTRycQ==" target="_blank">Nayla</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
                         </div>
                     </div>
                     <div class="col-lg-4">
