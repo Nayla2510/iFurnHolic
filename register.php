@@ -1,3 +1,11 @@
+<?php
+
+require 'admin/koneksi.php';
+require 'function.php';
+$sql = mysqli_query($koneksi, "select * from tb_user");
+$data = mysqli_fetch_array($sql);
+?>
+
 <!doctype html>
 <html lang="zxx">
 
@@ -27,34 +35,17 @@
 </head>
 
 <body>
-    <!--::header part start::-->
-    <header class="main_menu home_menu">
-        <div class="container">
-            <div class="row align-items-center">
-                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="single_product">
-    
-                                    </div>
-                                </div> -->
-                                
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <div class="search_input" id="search_input_box">
-            <div class="container ">
-                <form class="d-flex justify-content-between search-inner">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                    <button type="submit" class="btn"></button>
-                    <span class="ti-close" id="close_search" title="Close Search"></span>
-                </form>
-            </div>
-        </div>
-    </header>
-    <!-- Header part end-->
-
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (regristrasi($_POST)) {
+            echo "<script>alert('User baru berhasl ditambahkan');";
+            echo"window.location.href = 'login.php';</script>";
+            exit;
+        } else {
+            echo "<script>alert('Registrasi gagal');</script>";
+        }
+    }
+    ?>
 
     <!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
@@ -90,7 +81,7 @@
                         <div class="login_part_form_iner">
                             <h3>Buat Akun Baru <br>
                                 Bergabung dengan iFurnHolic Sekarang</h3>
-                            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                            <form class="row contact_form" method="post">
                                 <div class="col-md-12 form-group p_star">
                                     <input type="text" class="form-control" id="name" name="username" value=""
                                         placeholder="username">
@@ -105,7 +96,7 @@
                                 </div>
                                 <div class="col-md-12 form-group">
                                     </div>
-                                    <button type="submit" value="submit" class="btn_3">
+                                    <button type="submit" value="submit" class="btn_3" name="register">
                                         Daftar Sekarang
                                     </button>
                                 </div>

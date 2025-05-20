@@ -16,15 +16,11 @@ if (isset($_POST["login"])) {
     // Cek password
     if (password_verify($password, $row["password"])) {
       // Cek apakah status user adalah admin
-      if ($row["status"] === "admin") {
+
         $_SESSION["login"] = true;
         $_SESSION["username"] = $row["username"];
-        $_SESSION["status"] = $row["status"];
-        header("Location: index.php");
-        exit;
-      } else {
-        echo "<script>alert('Anda tidak memiliki akses sebagai admin.')</script>";
-      }
+        $_SESSION["id_user"] = $row["id_user"];
+        header("refresh:0, index.php");
     } else {
       echo "<script>alert('Username atau password yang anda masukkan salah')</script>";
     }
