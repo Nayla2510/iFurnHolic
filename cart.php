@@ -239,6 +239,28 @@ WHERE u.id_user = '$id_user'";
   </section>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
+      // Fungsi untuk menangani increment dan decrement secara spesifik per baris
+      document.querySelectorAll(".product_count").forEach(function(container) {
+        const input = container.querySelector(".input-number");
+        const btnMinus = container.querySelector(".input-number-decrement");
+        const btnPlus = container.querySelector(".input-number-increment");
+
+        btnMinus.addEventListener("click", function() {
+          let currentVal = parseInt(input.value);
+          if (!isNaN(currentVal) && currentVal > 1) {
+            input.value = currentVal - 1;
+          }
+        });
+
+        btnPlus.addEventListener("click", function() {
+          let currentVal = parseInt(input.value);
+          if (!isNaN(currentVal)) {
+            input.value = currentVal + 1;
+          }
+        });
+      });
+
+      // Checkout tombol
       document.getElementById("checkoutBtn").addEventListener("click", function() {
         fetch("proses_checkout.php", {
             method: "POST",
@@ -251,7 +273,7 @@ WHERE u.id_user = '$id_user'";
           .then(data => {
             if (data.success) {
               alert("Checkout berhasil!");
-              window.location.href = "belanja.php"; // Redirect ke halaman riwayat transaksi
+              window.location.href = "belanja.php";
             } else {
               alert("Gagal checkout: " + data.message);
             }
