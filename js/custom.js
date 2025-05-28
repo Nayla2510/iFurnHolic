@@ -263,49 +263,34 @@
 
   }
 // click counter js
-(function() {
- 
-  window.inputNumber = function(el) {
+(function () {
+    window.inputNumber = function (el) {
+      el.each(function () {
+        var $input = $(this);
+        var min = $input.attr("min") || false;
+        var max = $input.attr("max") || false;
 
-    var min = el.attr('min') || false;
-    var max = el.attr('max') || false;
+        var $dec = $input.prev();
+        var $inc = $input.next();
 
-    var els = {};
+        $dec.on("click", function () {
+          var value = parseInt($input.val(), 10);
+          if (!min || value > min) {
+            $input.val(value - 1);
+          }
+        });
 
-    els.dec = el.prev();
-    els.inc = el.next();
-
-    el.each(function() {
-      init($(this));
-    });
-
-    function init(el) {
-
-      els.dec.on('click', decrement);
-      els.inc.on('click', increment);
-
-      function decrement() {
-        var value = el[0].value;
-        value--;
-        if(!min || value >= min) {
-          el[0].value = value;
-        }
-      }
-
-      function increment() {
-        var value = el[0].value;
-        value++;
-        if(!max || value <= max) {
-          el[0].value = value++;
-        }
-      }
-    }
-  }
-})();
-
-inputNumber($('.input-number'));
-
-
+        $inc.on("click", function () {
+          var value = parseInt($input.val(), 10);
+          if (!max || value < max) {
+            $input.val(value + 1);
+          }
+        });
+      });
+    };
+  })();
+  // Input number js
+  inputNumber($(".input-number"));
 
   setInterval(function () {
     makeTimer();

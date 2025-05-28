@@ -95,7 +95,7 @@ foreach ($pesanan_data as $pesanan) {
     $query_update_stok = "UPDATE tb_produk SET stok = stok - $qty WHERE id_produk = '$id_pproduk'";
 
     if (!mysqli_query($koneksi,  $query_update_stok)) {
-        die(json_encode(["success" => false, "message" => "Gagagl update stok produk: " . mysqli_error($koneksi)]));
+        die(json_encode(["success" => false, "message" => "Gagal update stok produk: " . mysqli_error($koneksi)]));
     }
 }
 
@@ -106,4 +106,5 @@ if (!mysqli_query($koneksi, $query_hapus)) {
 }
 
 echo json_encode(["success" => true]);
+
 ?>

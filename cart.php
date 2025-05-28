@@ -239,28 +239,6 @@ WHERE u.id_user = '$id_user'";
   </section>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Fungsi untuk menangani increment dan decrement secara spesifik per baris
-      document.querySelectorAll(".product_count").forEach(function(container) {
-        const input = container.querySelector(".input-number");
-        const btnMinus = container.querySelector(".input-number-decrement");
-        const btnPlus = container.querySelector(".input-number-increment");
-
-        btnMinus.addEventListener("click", function() {
-          let currentVal = parseInt(input.value);
-          if (!isNaN(currentVal) && currentVal > 1) {
-            input.value = currentVal - 1;
-          }
-        });
-
-        btnPlus.addEventListener("click", function() {
-          let currentVal = parseInt(input.value);
-          if (!isNaN(currentVal)) {
-            input.value = currentVal + 1;
-          }
-        });
-      });
-
-      // Checkout tombol
       document.getElementById("checkoutBtn").addEventListener("click", function() {
         fetch("proses_checkout.php", {
             method: "POST",
@@ -273,7 +251,7 @@ WHERE u.id_user = '$id_user'";
           .then(data => {
             if (data.success) {
               alert("Checkout berhasil!");
-              window.location.href = "belanja.php";
+              window.location.href = "belanja.php"; // Redirect ke halaman riwayat transaksi
             } else {
               alert("Gagal checkout: " + data.message);
             }
@@ -287,47 +265,47 @@ WHERE u.id_user = '$id_user'";
 
   <!--::footer_part start::-->
   <footer class="footer_part">
-    <div class="container">
-      <div class="row justify-content-around">
-        <div class="col-sm-6 col-lg-2">
-        </div>
-        <div class="col-sm-6 col-lg-2">
-        </div>
-        <div class="col-sm-6 col-lg-2">
-        </div>
-        <div class="col-sm-6 col-lg-2">
-        </div>
-        <div class="col-sm-6 col-lg-4">
-        </div>
-      </div>
+        <div class="container">
+            <div class="row justify-content-around">
+                <div class="col-sm-6 col-lg-2">
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                </div>
+            </div>
 
-    </div>
-    <div class="copyright_part">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="copyright_text">
-              <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>
-                  document.write(new Date().getFullYear());
-                </script> All rights reserved | iFurnHolic <i class="ti-heart" aria-hidden="true"></i> by <a href="https://www.instagram.com/nylftrn__?igsh=MWo5aWc0anQzdTRycQ==" target="_blank">Nayla</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="footer_icon social_icon">
-              <ul class="list-unstyled">
-                <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
-                <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </footer>
+        <div class="copyright_part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="copyright_text">
+                            <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>
+                                    document.write(new Date().getFullYear());
+                                </script> All rights reserved | iFurnHolic <i class="ti-heart" aria-hidden="true"></i> by <a href="https://www.instagram.com/nylftrn__?igsh=MWo5aWc0anQzdTRycQ==" target="_blank">Nayla</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="footer_icon social_icon">
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
+                                <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
   <!--::footer_part end::-->
 
   <!-- jquery plugins here-->
