@@ -34,7 +34,7 @@ foreach ($pesanan_data as $pesanan) {
 
     $query_stok = "SELECT stok FROM tb_produk WHERE id_produk = '$id_produk'";
     $result_stok = mysqli_query($koneksi, $query_stok);
-    $result_stok = mysqli_fetch_assoc($result_stok);
+    $row_stok = mysqli_fetch_assoc($result_stok);
 
     if (!$row_stok || $row_stok['stok'] < $qty) {
         echo json_encode(["success" => false, "message" => "Stok tidak cukup untuk produk ID: $id_produk"]);
@@ -53,12 +53,12 @@ if ($subtotal > 700000 && $subtotal <= 1500000) {
 $total_bayar = $subtotal - $diskon;
 
 // Generate ID Jual otomatis
-$query_id = "SELECT MAX (id_jual) AS last_id FROM tb_jual";
+$query_id = "SELECT MAX(id_jual) AS last_id FROM tb_jual";
 $result_id = mysqli_query($koneksi, $query_id);
 $row_id = mysqli_fetch_assoc($result_id);
 $last_id = $row_id['last_id'];
 
-if (!$last_id) {
+if ($last_id) {
     $new_id = 'T' . str_pad((intval(substr($last_id, 1)) + 1), 3, '0', STR_PAD_LEFT);
 } else {
     $new_id = 'T001';
@@ -92,7 +92,7 @@ foreach ($pesanan_data as $pesanan) {
     $id_produk = mysqli_real_escape_string($koneksi, $pesanan['id_produk']);
     $qty = intval($pesanan['qty']);
 
-    $query_update_stok = "UPDATE tb_produk SET stok = stok - $qty WHERE id_produk = '$id_pproduk'";
+    $query_update_stok = "UPDATE tb_produk SET stok = stok - $qty WHERE id_produk = '$id_produk'";
 
     if (!mysqli_query($koneksi,  $query_update_stok)) {
         die(json_encode(["success" => false, "message" => "Gagal update stok produk: " . mysqli_error($koneksi)]));

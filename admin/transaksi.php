@@ -181,25 +181,25 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
         include 'koneksi.php';
 
         // Ambil kategori dari database untuk dropdown filter
-        $sql_kategori = "SELECT id_kategori, nm_katgeori FROM tb_kategori";
+        $sql_kategori = "SELECT id_kategori, nm_kategori FROM tb_kategori";
         $result_kategori = $koneksi->query($sql_kategori);
 
         // Ambil kategori yang dipilih dari URL (jika ada)
-        $kategori_filter = isset($_GET['kategori']) ? $_GET['kategori'] : '';
+        $kategori_filter = isset($_GET['kategori']) ? $_GET['kategori'] : "";
 
         // Query untuk mengambil data penjualan dengan filter kategori jika ada
-        $sql = "SELECT j.id_jual, u.username, j.tgl_jual, j.total, j.diskon
-        FROM tb_jual j
-        JOIN tb_user u ON j.id_user = u.user";
+        $sql = "SELECT j.id_jual, u.username, j.tgl_jual, j.total, j.diskon 
+        FROM tb_jual j 
+        JOIN tb_user u ON j.id_user = u.id_user";
 
         if (!empty($kategori_filter)) {
             // Jika kategori dipilih, filter berdasarkan kategori yang terkait dengan produk dalam tb_jualdtl
-            $sql .= "JOIN tb_jualdtl jd ON j.id_jual = jd.id_jual
-            JOIN tb_produk p ON jd.id_produk = p.id_produk
-            WHERE p.id_kategori = '$kategori_filter'";
+            $sql .= " JOIN tb_jualdtl jd ON j.id_jual = jd.id_jual
+              JOIN tb_produk p ON jd.id_produk = p.id_produk
+              WHERE p.id_kategori = '$kategori_filter'";
         }
-        
-        $sql .= "GROUP BY j.id_jual ORDER BY j.tgl_jual ASC"; // Mengelompokkan dan mengurutkan berdasarkan tanggal terbaru
+
+        $sql .= " GROUP BY j.id_jual ORDER BY j.tgl_jual ASC"; // Mengelompokkan dan mengurutkan berdasarkan tanggal terbaru
         $result = $koneksi->query($sql);
         ?>
         
@@ -254,12 +254,12 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
                                             echo "<tr>";
                                             echo "<td>" . $no++ . "</td>"; 
                                             echo "<td>" . $row["id_jual"] . "</td>";
-                                            echo "<td>" . $row["usernamek"] . "</td>";
+                                            echo "<td>" . $row["username"] . "</td>";
                                             echo "<td>" . date("d-m-Y H:i:s", strtotime($row["tgl_jual"])) . "</td>";
                                             echo "<td>Rp " . number_format($row["total"], 0, ", ", ".") . "</td>";
                                             echo "<td>Rp " . number_format($row["diskon"], 0, ", ", ".") . "</td>";
                                             echo "<td>
-                                            <a herf='detail_jual.php?id=" . $row["id_jual"] ."' class='btn btn-info btn-sm'>Detail</a>
+                                            <a href='detail_jual.php?id=" . $row["id_jual"] ."' class='btn btn-info btn-sm'>Detail</a>
                                              </td>";
                                             echo "</tr>";
                                         }

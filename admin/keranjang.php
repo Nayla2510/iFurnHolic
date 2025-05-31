@@ -216,9 +216,7 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
 
         <section class="section">
             <div class="row">
-
                 <div class="col-lg-12">
-
                     <div class="card">
                         <div class="card-body">
 
