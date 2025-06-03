@@ -60,13 +60,6 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="GET" action="">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
-
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
@@ -109,57 +102,59 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
 
     </header><!-- End Header -->
 
+    <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index.php">
-                    <i class="bi bi-grid"></i>
+                    <i class="bi bi-house-fill"></i>
                     <span>Beranda</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li><!-- End Beranda Nav -->
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="kategori.php">
-                    <i class="bi bi-airplane"></i>
-                    <span>Kategori</span>
+                    <i class="bi bi-tag-fill"></i>
+                    <span>Kategori Produk</span>
                 </a>
             </li><!-- End Kategori Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="produk.php">
-                    <i class="bi bi-question-circle"></i>
+                    <i class="bi bi-bag-plus"></i>
                     <span>Produk</span>
                 </a>
             </li><!-- End Produk Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="keranjang.php">
-                    <i class="bi bi-envelope"></i>
+                    <i class="bi bi-cart-plus"></i>
                     <span>Keranjang</span>
                 </a>
             </li><!-- End Keranjang Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link" href="transaksi.php">
-                    <i class="bi bi-card-list"></i>
+                    <i class="bi bi-cash"></i>
                     <span>Transaksi</span>
                 </a>
             </li><!-- End Transaksi Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="laporan.php">
-                    <i class="bi bi-box-arrow-in-right"></i>
+                    <i class="bi bi-file-earmark-text"></i>
                     <span>Laporan</span>
                 </a>
             </li><!-- End Laporan Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="pengguna.php">
-                    <i class="bi bi-dash-circle"></i>
+                    <i class="bi bi-person"></i>
                     <span>Pengguna</span>
                 </a>
-            </li><!-- End pengguna Page Nav -->
+            </li><!-- End Pengguna Page Nav -->
         </ul>
 
     </aside><!-- End Sidebar-->

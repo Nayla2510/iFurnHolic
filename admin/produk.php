@@ -9,7 +9,7 @@ if (!isset($_SESSION["login"])) {
 }
 
 // Cek apakah status tersedia dan pastikan user adalah admin
-if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
+if (!isset($_SESSION["status"]) || $_SESSION["status"] !== "admin") {
     echo "<script>alert('Akses ditolak!Halaman ini hanya untuk Admin.'); window.location.href='login.php'</script>";
     exit;
 }
@@ -76,7 +76,7 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
                     </a>
                 </li><!-- End Search Icon-->
 
-                 <li class="nav-item dropdown pe-3">
+                <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <img src="assets/img/zoro.jpg" alt="Profile" class="rounded-circle">
@@ -109,57 +109,59 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
 
     </header><!-- End Header -->
 
+    <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index.php">
-                    <i class="bi bi-grid"></i>
+                    <i class="bi bi-house-fill"></i>
                     <span>Beranda</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li><!-- End Beranda Nav -->
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="kategori.php">
-                    <i class="bi bi-airplane"></i>
-                    <span>Kategori</span>
+                    <i class="bi bi-tag-fill"></i>
+                    <span>Kategori Produk</span>
                 </a>
             </li><!-- End Kategori Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link" href="produk.php">
-                    <i class="bi bi-question-circle"></i>
+                    <i class="bi bi-bag-plus"></i>
                     <span>Produk</span>
                 </a>
             </li><!-- End Produk Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link  collapsed" href="keranjang.php">
-                    <i class="bi bi-envelope"></i>
+                <a class="nav-link collapsed" href="keranjang.php">
+                    <i class="bi bi-cart-plus"></i>
                     <span>Keranjang</span>
                 </a>
             </li><!-- End Keranjang Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="transaksi.php">
-                    <i class="bi bi-card-list"></i>
+                    <i class="bi bi-cash"></i>
                     <span>Transaksi</span>
                 </a>
             </li><!-- End Transaksi Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="laporan.php">
-                    <i class="bi bi-box-arrow-in-right"></i>
+                    <i class="bi bi-file-earmark-text"></i>
                     <span>Laporan</span>
                 </a>
             </li><!-- End Laporan Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="pengguna.php">
-                    <i class="bi bi-dash-circle"></i>
+                    <i class="bi bi-person"></i>
                     <span>Pengguna</span>
                 </a>
-            </li><!-- End pengguna Page Nav -->
+            </li><!-- End Pengguna Page Nav -->
         </ul>
 
     </aside><!-- End Sidebar-->
@@ -215,11 +217,11 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
                                     include "koneksi.php";
                                     $no = 1;
 
-                                    $query = isset($_GET['query']) ? mysqli_real_escape_string($koneksi, $GET['query']) : '';
-                                    $sql_query = "SELECT tb_produk. *, tb_kategori.nm_kategori FROM tb_produk LEFT JOIN tb_kategori ON tb_produk.id_kategori = tb_kategori.id_kategori";
+                                    $query = isset($_GET['query']) ? mysqli_real_escape_string($koneksi, $_GET['query']) : '';
+                                    $sql_query = "SELECT tb_produk.*, tb_kategori.nm_kategori FROM tb_produk LEFT JOIN tb_kategori ON tb_produk.id_kategori = tb_kategori.id_kategori";
 
                                     if (!empty($query)) {
-                                        $sql_query .= " WHERE tb_produk.nm_produk LIKE '%$query%' OR tb_kategori.desk LIKE '%$query%'";
+                                        $sql_query .= " WHERE tb_produk.nm_produk LIKE '%$query%' OR tb_produk.desk LIKE '%$query%'";
                                     }
 
                                     $sql = mysqli_query($koneksi, $sql_query);

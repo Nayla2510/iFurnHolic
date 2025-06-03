@@ -9,7 +9,7 @@ if (!isset($_SESSION["login"])) {
 }
 
 // Cek apakah status tersedia dan pastikan user adalah admin
-if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
+if (!isset($_SESSION["status"]) || $_SESSION["status"] !== "admin") {
     echo "<script>alert('Akses ditolak!Halaman ini hanya untuk Admin.'); window.location.href='login.php'</script>";
     exit;
 }
@@ -60,13 +60,6 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="GET" action="">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
-
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
@@ -76,7 +69,7 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
                     </a>
                 </li><!-- End Search Icon-->
 
-                 <li class="nav-item dropdown pe-3">
+                <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <img src="assets/img/zoro.jpg" alt="Profile" class="rounded-circle">
@@ -109,61 +102,62 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
 
     </header><!-- End Header -->
 
+    <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index.php">
-                    <i class="bi bi-grid"></i>
+                    <i class="bi bi-house-fill"></i>
                     <span>Beranda</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li><!-- End Beranda Nav -->
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="kategori.php">
-                    <i class="bi bi-airplane"></i>
-                    <span>Kategori</span>
+                    <i class="bi bi-tag-fill"></i>
+                    <span>Kategori Produk</span>
                 </a>
             </li><!-- End Kategori Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link" href="produk.php">
-                    <i class="bi bi-question-circle"></i>
+                    <i class="bi bi-bag-plus"></i>
                     <span>Produk</span>
                 </a>
             </li><!-- End Produk Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link  collapsed" href="keranjang.php">
-                    <i class="bi bi-envelope"></i>
+                <a class="nav-link collapsed" href="keranjang.php">
+                    <i class="bi bi-cart-plus"></i>
                     <span>Keranjang</span>
                 </a>
             </li><!-- End Keranjang Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="transaksi.php">
-                    <i class="bi bi-card-list"></i>
+                    <i class="bi bi-cash"></i>
                     <span>Transaksi</span>
                 </a>
             </li><!-- End Transaksi Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="laporan.php">
-                    <i class="bi bi-box-arrow-in-right"></i>
+                    <i class="bi bi-file-earmark-text"></i>
                     <span>Laporan</span>
                 </a>
             </li><!-- End Laporan Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="pengguna.php">
-                    <i class="bi bi-dash-circle"></i>
+                    <i class="bi bi-person"></i>
                     <span>Pengguna</span>
                 </a>
-            </li><!-- End pengguna Page Nav -->
+            </li><!-- End Pengguna Page Nav -->
         </ul>
 
     </aside><!-- End Sidebar-->
-
     <main id="main" class="main">
 
         <div class="pagetitle">
@@ -184,31 +178,31 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
                             <h5 class="card-title">Lihat Detail Transaksi</h5>
                             <div class="table-responsive">
                                 <?php
-                                include 'koneksi.php'; // pastikan koneksi  DB kamu benar
+                                include 'koneksi.php'; // pastikan koneksi DB kamu benar
 
                                 $id_jual = $_GET['id']; // misalnya dari URL atau request
 
                                 // ambil data tb_jual
                                 $jual = mysqli_fetch_assoc(mysqli_query($koneksi, "
-    SELECT * FROM tb_jual tj
-    JOIN tb_user tu ON tj.id_user = tu.id_user
+    SELECT * FROM tb_jual tj 
+    JOIN tb_user tu ON tj.id_user = tu.id_user 
     WHERE tj.id_jual = '$id_jual'
- "));
+"));
+
                                 // ambil data detail jual
                                 $detail = mysqli_query($koneksi, "
-    SELECT tjd.id_produk,  tjd.qty,  tjd.harga AS subtotal,  tp.nm_produk, tp.harga AS harga_produk
-    FROM tb_jualdtl tjd
-    JOIN tb_produk tp ON tjd.id_produk = tp.id_produk
-    WHERE tj.id_jual = '$id_jual'                            
- ");
-                                    
+    SELECT tjd.id_produk, tjd.qty, tjd.harga AS subtotal, tp.nm_produk, tp.harga AS harga_produk
+    FROM tb_jualdtl tjd 
+    JOIN tb_produk tp ON tjd.id_produk = tp.id_produk 
+    WHERE tjd.id_jual = '$id_jual'
+");
                                 ?>
 
                                 <table class="table table-striped mt-2">
                                     <tbody>
                                         <tr>
                                             <th>Kode Belanja</th>
-                                            <td><?=$jual['id_jual'] ?></td>
+                                            <td><?= $jual['id_jual'] ?></td>
                                         </tr>
                                         <tr>
                                             <th>Pengguna</th>
@@ -220,48 +214,47 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
                                         </tr>
                                         <tr>
                                             <th>Total Bayar</th>
-                                            <td>Rp <?= number_format($jual['total'], 0, ', ', '.') ?></td>
+                                            <td>Rp <?= number_format($jual['total'], 0, ',', '.') ?></td>
                                         </tr>
                                         <tr>
                                             <th>Diskon</th>
-                                            <td>Rp <?= number_format($jual['diskon'], 0, ', ', '.') ?></td>
+                                            <td>Rp <?= number_format($jual['diskon'], 0, ',', '.') ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
 
-                                <h5>Detail Pembelian</h5>
-                            </div>
-                            <table class="table table-borered">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Produk</th>
-                                        <th>Harga</th>
-                                        <th>Qty</th>
-                                        <th>Subtotal Bayar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $no = 1;
-                                    while ($d = mysqli_fetch_assoc($detail)) :
-                                    ?>
+                                <h5>Detail Pembelian:</h5>
+                                <table class="table table-bordered">
+                                    <thead>
                                         <tr>
-                                            <td><? $no++ ?></td>
-                                            <td><?=$d['nm_produk'] ?></td>
-                                            <td>Rp <?= number_format($d['harga_produk'], 0, ', ', '.') ?></td>
-                                            <td><? $d['qty'] ?></td>
-                                            <td>Rp <?= number_format($d['subtotal'], 0, ', ', '.') ?></td>
+                                            <th>No</th>
+                                            <th>Nama Produk</th>
+                                            <th>Harga</th>
+                                            <th>Qty</th>
+                                            <th>Subtotal</th>
                                         </tr>
-                                    <?php endwhile; ?>
-                                </tbody>
-                            </table>
-                              
-                            
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $no = 1;
+                                        while ($d = mysqli_fetch_assoc($detail)) :
+                                        ?>
+                                            <tr>
+                                                <td><?= $no++ ?></td>
+                                                <td><?= $d['nm_produk'] ?></td>
+                                                <td>Rp <?= number_format($d['harga_produk'], 0, ',', '.') ?></td>
+                                                <td><?= $d['qty'] ?></td>
+                                                <td>Rp <?= number_format($d['subtotal'], 0, ',', '.') ?></td>
+                                            </tr>
+                                        <?php endwhile; ?>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <a href="transaksi.php" class="btn btn-secondary">Kembali</a>
                         </div>
-                        <a href="transaksi.php" class="btn btn-secondary">Kembali</a>
                     </div>
-                 </div>
                 </div>
             </div>
         </section>

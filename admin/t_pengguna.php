@@ -120,55 +120,56 @@ if (isset($_POST['simpan'])) {
 
     </header><!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
+     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index.php">
-                    <i class="bi bi-house-door"></i>
+                    <i class="bi bi-house-fill"></i>
                     <span>Beranda</span>
                 </a>
             </li><!-- End Beranda Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="kategori.php">
-                    <i class="bi bi-tags"></i>
+                    <i class="bi bi-tag-fill"></i>
                     <span>Kategori Produk</span>
                 </a>
-            </li><!-- End Kategori Produk Page Nav -->
+            </li><!-- End Kategori Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="produk.php">
-                    <i class="bi bi-shop"></i>
+                <a class="nav-link" href="produk.php">
+                    <i class="bi bi-bag-plus"></i>
                     <span>Produk</span>
                 </a>
             </li><!-- End Produk Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="keranjang.php">
-                    <i class="bi bi-cart"></i>
+                    <i class="bi bi-cart-plus"></i>
                     <span>Keranjang</span>
                 </a>
             </li><!-- End Keranjang Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="transaksi.php">
-                    <i class="bi bi-receipt"></i>
+                    <i class="bi bi-cash"></i>
                     <span>Transaksi</span>
                 </a>
             </li><!-- End Transaksi Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="laporan.php">
-                    <i class="bi bi-file-earmark-bar-graph"></i>
+                    <i class="bi bi-file-earmark-text"></i>
                     <span>Laporan</span>
                 </a>
             </li><!-- End Laporan Page Nav -->
+
             <li class="nav-item">
-                <a class="nav-link" href="pengguna.php">
-                    <i class="bi bi-people"></i>
+                <a class="nav-link collapsed" href="pengguna.php">
+                    <i class="bi bi-person"></i>
                     <span>Pengguna</span>
                 </a>
             </li><!-- End Pengguna Page Nav -->
