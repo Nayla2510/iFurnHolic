@@ -91,13 +91,13 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Beranda</a>
+                                    <a class="nav-link" href="index.php">Beranda</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Belanja</a>
+                                    <a class="nav-link" href="belanja.php">Belanja</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Hubungi Kami</a>
+                                    <a class="nav-link" href="contact.php">Hubungi Kami</a>
                                 </li>
                             </ul>
                         </div>
@@ -293,11 +293,11 @@
 
                                         <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
                                             <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                                                <a class="page-link" href="?id_kategori=<?php echo $id_kategori; ?>&search=<?php echo $search; ?>&page=<?php echo $i; ?>"></a>
+                                                <a class="page-link" href="?id_kategori=<?php echo $id_kategori; ?>&search=<?php echo $search; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
                                             </li>
                                         <?php } ?>
 
-                                        <?php if ($page < 1) { ?>
+                                        <?php if ($page < $total_pages) { ?>
                                             <li class="page-item">
                                                 <a class="page-link" href="?id_kategori=<?php echo $id_kategori; ?>&search=<?php echo $search; ?>&page=<?php echo ($page + 1); ?>" aria-label="Next">
                                                     <i class="ti-angle-double-right"></i>

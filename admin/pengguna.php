@@ -85,7 +85,7 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !== "admin") {
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>Nayla</h6>
+                            <h6><?php echo isset($_SESSION['username']) ? htmlentities($_SESSION['username']) : 'Guest' ; ?></h6>
                             <span>Admin</span>
                         </li>
                         <li>

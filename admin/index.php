@@ -79,7 +79,7 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !== "admin") {
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Nayla</h6>
+              <h6><?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guset'; ?></h6>
               <span>Admin</span>
             </li>
             <li>
@@ -194,6 +194,16 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !== "admin") {
             <!-- End Welcome Card -->
 
             <!-- Orders Card -->
+
+            <?php
+            include'koneksi.php';
+
+            $query = "SELECT COUNT(*) AS total_pesanan FROM tb_jual";
+            $result = mysqli_query($koneksi, $query);
+            $data = mysqli_fetch_assoc($result);
+            $totalPesanan = $data['total_pesanan'] ?? 0;
+            ?>
+            <!-- Orders Card -->
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
 
@@ -204,13 +214,28 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !== "admin") {
                       <i class="bi bi-basket"></i> <!-- Ikon keranjang belanja -->
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
+                      <h6><?php echo $totalPesanan; ?></h6>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <!-- End Orders Card -->
+
+            <?php
+            include 'koneksi.php';
+
+            // Ambil tanggal hari ini
+            $tanggalHariIni = date("Y-m-d");
+
+            // Query langsung ke tb_jual berdasarkan tanggal hari ini
+            $query = "SELECT SUM(total) AS total_revenue FROM tb_jual WHERE DATE (tgl_jual) = '$tanggalHariIni'";
+
+            $result = mysqli_query($koneksi, $query);
+            $data = mysqli_fetch_assoc($result);
+            $totalRevenue = $data['total_revenue'] ?? 0;
+            ?>
+
 
             <!-- Revenue Card -->
             <div class="col-xxl-4 col-md-6">
@@ -223,7 +248,7 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !== "admin") {
                       <i class="bi bi-currency-dollar"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>Rp. 35.000</h6>
+                      <h6>Rp<?php echo number_format($totalRevenue, 0, ', ', '.'); ?></h6>
                     </div>
                   </div>
                 </div>
