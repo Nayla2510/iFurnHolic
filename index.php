@@ -77,7 +77,7 @@
                         </div>
                         <?php session_start(); ?>
                         <?php if (isset($_SESSION['username'])) : ?>
-                            <div class="hearer_icon d-flex">
+                            <div class="header_icon d-flex">
                                 <?php
                                 include 'admin/koneksi.php';
 
@@ -254,11 +254,9 @@
                                 <div id="seconds" class="date"></div>
                             </div>
                         </div>
-                        <div class="input-group mt-3">
-                            <input type="text" class="form-control" placeholder="masukkan alamat email Anda"
-                                aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group">
                             <div class="input-group-append">
-                                <a href="belanja.php" class="btn_2">Dapatkan Promo</a>
+                                <a href="belanja.php" class="input-group-text btn_4" id="basic-addon4">Dapatkan Promo Sekarang</a>
                             </div>
                         </div>
                     </div>
@@ -301,7 +299,7 @@
                     <div class="col-lg-4">
                         <div class="footer_icon social_icon">
                             <ul class="list-unstyled">
-                                <li><a href="#" class="single_social_icon"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="https://www.instagram.com/nylftrn__?igsh=MWo5aWc0anQzdTRycQ==" class="single_social_icon"><i class="fab fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>

@@ -347,7 +347,7 @@
                     <div class="col-lg-4">
                         <div class="footer_icon social_icon">
                             <ul class="list-unstyled">
-                                <li><a href="#" class="single_social_icon"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="https://www.instagram.com/nylftrn__?igsh=MWo5aWc0anQzdTRycQ==" class="single_social_icon"><i class="fab fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>

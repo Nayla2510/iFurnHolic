@@ -84,7 +84,7 @@ if (isset($_POST["login"])) {
                         <div class="login_part_text_iner">
                             <h2>Belum Punya Akun di iFurnHolic?</h2>
                             <p>Bawa Kehangatan Alam ke Rumah Anda dengan Desain Furnitur yang Natural dan Menenangkan</p>
-                            <a href="#" class="btn_3">Daftar Sekarang</a>
+                            <a href="register.php" class="btn_3">Daftar Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ if (isset($_POST["login"])) {
                         <div class="login_part_form_iner">
                             <h3>Selamat Datang Kembali! <br>
                                 Silahkan Masuk untuk Melanjutkan</h3>
-                            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                            <form class="row contact_form" action="#" method="post">
                                 <div class="col-md-12 form-group p_star">
                                     <input type="text" class="form-control" id="name" name="username" value=""
                                     placeholder="username">
@@ -148,7 +148,7 @@ if (isset($_POST["login"])) {
           <div class="col-lg-4">
             <div class="footer_icon social_icon">
               <ul class="list-unstyled">
-                <li><a href="#" class="single_social_icon"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.instagram.com/nylftrn__?igsh=MWo5aWc0anQzdTRycQ==" class="single_social_icon"><i class="fab fa-instagram"></i></a></li>
               </ul>
             </div>
           </div>
