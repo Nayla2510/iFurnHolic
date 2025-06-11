@@ -239,7 +239,7 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !== "admin") {
                                                 <td><?php echo $hasil['nm_kategori']; ?></td>
                                                 <td>
                                                     <?php if (!empty($hasil['gambar'])) { ?>
-                                                        <img src="produk_img/<?php echo $hasil['gambar']; ?>" width="100">
+                                                        <img src="produk_img/<?php echo $hasil['gambar']; ?>" width="100" height="100">
                                                     <?php } ?>
                                                 </td>
                                                 <td>

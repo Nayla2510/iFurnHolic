@@ -228,7 +228,7 @@ if (!isset($_SESSION["status"]) || $_SESSION["status"] !=="admin") {
 
                              // Tambahkan filter kategori jika dipilih
                              if (!empty($filter_kategori)) {
-                                $sql .= "WHERE k.id_kategori = '$filter_kategori'";
+                                $sql .= " WHERE k.id_kategori = '$filter_kategori'";
                              }
 
                              $result = $koneksi->query($sql);
