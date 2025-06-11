@@ -254,6 +254,7 @@ if (isset($_POST['update'])) {
                                 <div class="col-12">
                                     <label for="gambar" class="form-label">Gambar Produk</label>
                                     <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
+                                    <input type="hidden" name="gambar_lama" value="<?php echo $data['gambar']; ?>">
                                     <br>
                                     <?php if ($data['gambar']) { ?>
                                         <img src="produk_img/<?php echo $data['gambar']; ?>" alt="" width="150">
