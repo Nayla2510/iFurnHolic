@@ -26,7 +26,6 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     .map-container {
-      filter: grayscale(90%) brightness(110%);
       width: 100%;
       height: 450px;
       overflow: hidden;
