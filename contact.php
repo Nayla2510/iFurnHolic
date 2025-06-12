@@ -203,7 +203,7 @@
             <span class="contact-info__icon"><i class="ti-home"></i></span>
             <div class="media-body">
               <h3>Cepu, Jawa Tengah</h3>
-              <p>Sitimulyo, Gang V.</p>
+              <p>Mentul Indah</p>
             </div>
           </div>
           <div class="media contact-info">
