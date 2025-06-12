@@ -150,7 +150,7 @@ if (isset($_POST['update'])) {
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link" href="index.php">
+        <a class="nav-link collapsed" href="index.php">
           <i class="bi bi-house-fill"></i>
           <span>Beranda</span>
         </a>
@@ -164,7 +164,7 @@ if (isset($_POST['update'])) {
       </li><!-- End Kategori Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="produk.php">
+        <a class="nav-link" href="produk.php">
           <i class="bi bi-bag-plus"></i>
           <span>Produk</span>
         </a>
